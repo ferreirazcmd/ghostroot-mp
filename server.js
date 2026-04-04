@@ -105,11 +105,15 @@ async function mercadoPagoRequest(endpoint, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
+    console.error('Mercado Pago status:', response.status);
+    console.error('Mercado Pago resposta:', JSON.stringify(data, null, 2));
+
     const errorMessage =
       data?.message ||
       data?.cause?.[0]?.description ||
       data?.error ||
       'Erro na API do Mercado Pago.';
+
     throw new Error(errorMessage);
   }
 
