@@ -7,20 +7,21 @@
   <style>
     :root {
       --bg: #050505;
-      --bg-soft: #0c0707;
-      --card: rgba(19, 8, 8, 0.82);
-      --card-strong: rgba(24, 9, 9, 0.95);
+      --bg-soft: #0d0707;
+      --card: rgba(18, 8, 8, 0.82);
+      --card-strong: rgba(20, 9, 9, 0.94);
       --line: rgba(255, 255, 255, 0.08);
-      --line-strong: rgba(255, 70, 70, 0.18);
-      --text: #f5f5f5;
-      --muted: #b8a9a9;
-      --primary: #ff2e2e;
-      --primary-dark: #af0000;
-      --success: #27d17f;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      --line-strong: rgba(255, 66, 66, 0.18);
+      --text: #f6f4f4;
+      --muted: #b7a7a7;
+      --primary: #ff3030;
+      --primary-dark: #a80000;
+      --success: #2ed47a;
+      --warning: #ffcc66;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
       --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
       --max: 1180px;
     }
 
@@ -37,9 +38,9 @@
       color: var(--text);
       font-family: Inter, Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 15% 10%, rgba(255, 0, 0, 0.12), transparent 24%),
-        radial-gradient(circle at 85% 15%, rgba(255, 0, 0, 0.1), transparent 20%),
-        linear-gradient(180deg, #070707 0%, #100808 48%, #070707 100%);
+        radial-gradient(circle at 15% 8%, rgba(255, 0, 0, 0.12), transparent 22%),
+        radial-gradient(circle at 88% 18%, rgba(255, 0, 0, 0.08), transparent 20%),
+        linear-gradient(180deg, #060606 0%, #110808 50%, #060606 100%);
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
@@ -51,15 +52,16 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
+      z-index: 0;
     }
 
     .bg-grid {
       background-image:
-        linear-gradient(rgba(255, 0, 0, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.045) 1px, transparent 1px);
+        linear-gradient(rgba(255, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.04) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.15));
-      opacity: 0.3;
+      opacity: 0.28;
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.12));
     }
 
     .bg-glow::before,
@@ -70,40 +72,40 @@
       height: 520px;
       border-radius: 999px;
       filter: blur(90px);
-      opacity: 0.18;
-      animation: floatGlow 10s ease-in-out infinite alternate;
+      opacity: 0.16;
+      animation: glowFloat 10s ease-in-out infinite alternate;
     }
 
     .bg-glow::before {
+      top: -120px;
       left: -120px;
-      top: -60px;
-      background: #ff1c1c;
+      background: #ff2020;
     }
 
     .bg-glow::after {
-      right: -120px;
-      top: 140px;
-      background: #880000;
-      animation-delay: 1.2s;
+      right: -140px;
+      top: 120px;
+      background: #8a0000;
+      animation-delay: 1.5s;
     }
 
     .bg-particles span {
       position: absolute;
       width: 2px;
-      height: 90px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent);
-      opacity: 0.28;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      opacity: 0.25;
       transform: rotate(12deg);
       animation: rain 9s linear infinite;
     }
 
-    .bg-particles span:nth-child(1) { left: 10%; top: -10%; animation-delay: 0s; }
-    .bg-particles span:nth-child(2) { left: 22%; top: -25%; animation-delay: 1.6s; }
-    .bg-particles span:nth-child(3) { left: 38%; top: -18%; animation-delay: 3.2s; }
-    .bg-particles span:nth-child(4) { left: 54%; top: -12%; animation-delay: 0.9s; }
-    .bg-particles span:nth-child(5) { left: 69%; top: -22%; animation-delay: 2.4s; }
-    .bg-particles span:nth-child(6) { left: 82%; top: -16%; animation-delay: 4.1s; }
-    .bg-particles span:nth-child(7) { left: 92%; top: -28%; animation-delay: 5.2s; }
+    .bg-particles span:nth-child(1) { left: 10%; top: -20%; animation-delay: 0s; }
+    .bg-particles span:nth-child(2) { left: 22%; top: -10%; animation-delay: 1.1s; }
+    .bg-particles span:nth-child(3) { left: 35%; top: -28%; animation-delay: 2.7s; }
+    .bg-particles span:nth-child(4) { left: 50%; top: -14%; animation-delay: 0.8s; }
+    .bg-particles span:nth-child(5) { left: 66%; top: -20%; animation-delay: 3.1s; }
+    .bg-particles span:nth-child(6) { left: 80%; top: -26%; animation-delay: 4.3s; }
+    .bg-particles span:nth-child(7) { left: 92%; top: -16%; animation-delay: 5.3s; }
 
     .container {
       width: min(var(--max), calc(100% - 32px));
@@ -113,7 +115,7 @@
     }
 
     .header {
-      padding: 24px 0 16px;
+      padding: 24px 0 12px;
     }
 
     .nav {
@@ -121,7 +123,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 8px 0;
     }
 
     .brand {
@@ -131,60 +132,59 @@
     }
 
     .brand-badge {
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 20px;
-      background: linear-gradient(135deg, #ff4a4a, #9f0000);
       display: grid;
       place-items: center;
-      font-size: 25px;
+      background: linear-gradient(135deg, #ff4b4b, #8e0000);
+      box-shadow: 0 18px 40px rgba(255, 0, 0, 0.28);
       font-weight: 900;
+      font-size: 25px;
       letter-spacing: -0.04em;
-      box-shadow: 0 16px 40px rgba(255, 0, 0, 0.3);
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
-      line-height: 1.02;
+      line-height: 1.03;
     }
 
     .brand-text strong {
-      font-size: 21px;
+      font-size: 22px;
       letter-spacing: 0.12em;
     }
 
     .brand-text span {
-      font-size: 11px;
       color: var(--muted);
+      font-size: 11px;
       letter-spacing: 0.22em;
       font-weight: 700;
     }
 
-    .top-badge {
+    .top-pill {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 12px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 68, 68, 0.16);
-      background: rgba(255, 255, 255, 0.03);
-      color: #ffd6d6;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      border: 1px solid rgba(255, 71, 71, 0.16);
+      background: rgba(255,255,255,0.03);
+      color: #ffd8d8;
       font-size: 12px;
       font-weight: 800;
-      backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
     }
 
-    .top-badge::before {
+    .top-pill::before {
       content: "";
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #ff3030;
-      box-shadow: 0 0 18px #ff3030;
+      background: #ff3131;
+      box-shadow: 0 0 16px #ff3131;
     }
 
     .hero {
@@ -193,17 +193,17 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 30px;
       align-items: start;
     }
 
     .hero-copy {
-      padding-top: 14px;
+      padding-top: 12px;
     }
 
     .hero-copy h1 {
-      margin: 18px 0 18px;
+      margin: 20px 0 18px;
       font-size: clamp(42px, 7vw, 84px);
       line-height: 0.95;
       letter-spacing: -0.055em;
@@ -218,14 +218,14 @@
       max-width: 760px;
     }
 
-    .stats {
+    .hero-cards {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
       margin-top: 28px;
     }
 
-    .stat-card {
+    .mini-card {
       min-width: 220px;
       padding: 18px 22px;
       border-radius: 22px;
@@ -235,31 +235,27 @@
       backdrop-filter: blur(12px);
     }
 
-    .stat-card small {
+    .mini-card small {
       display: block;
       color: var(--muted);
       font-size: 13px;
       margin-bottom: 8px;
     }
 
-    .stat-card strong {
-      font-size: 36px;
+    .mini-card strong {
+      font-size: 35px;
       letter-spacing: -0.05em;
-    }
-
-    .hero-side {
-      position: relative;
     }
 
     .glass-card {
       position: relative;
       background:
-        linear-gradient(180deg, rgba(25, 10, 10, 0.96), rgba(14, 7, 7, 0.95));
-      border: 1px solid var(--line-strong);
+        linear-gradient(180deg, rgba(24, 10, 10, 0.95), rgba(12, 7, 7, 0.96));
       border-radius: var(--radius-xl);
+      border: 1px solid var(--line-strong);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
       overflow: hidden;
+      backdrop-filter: blur(16px);
     }
 
     .glass-card::before {
@@ -279,8 +275,8 @@
       width: 220px;
       height: 220px;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,0,0,0.18), transparent 70%);
-      filter: blur(12px);
+      background: radial-gradient(circle, rgba(255, 0, 0, 0.2), transparent 70%);
+      filter: blur(16px);
       pointer-events: none;
     }
 
@@ -297,8 +293,8 @@
     .form-card p {
       margin: 0 0 22px;
       color: var(--muted);
-      line-height: 1.7;
       font-size: 14px;
+      line-height: 1.7;
     }
 
     .form-grid {
@@ -320,7 +316,7 @@
     label {
       font-size: 15px;
       font-weight: 700;
-      color: #f4e7e7;
+      color: #f3e5e5;
     }
 
     input {
@@ -329,7 +325,7 @@
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.035);
-      color: #fff;
+      color: white;
       font-size: 17px;
       padding: 0 18px;
       outline: none;
@@ -337,7 +333,7 @@
     }
 
     input::placeholder {
-      color: #8e7c7c;
+      color: #917f7f;
     }
 
     input:focus {
@@ -351,27 +347,27 @@
       height: 64px;
       border: 0;
       border-radius: 18px;
-      background: linear-gradient(180deg, #ff3d3d 0%, #bf0000 100%);
+      background: linear-gradient(180deg, #ff3d3d 0%, #c10000 100%);
       color: white;
       font-size: 20px;
       font-weight: 900;
       letter-spacing: 0.01em;
       cursor: pointer;
       box-shadow:
-        0 18px 36px rgba(255, 0, 0, 0.24),
+        0 18px 36px rgba(255, 0, 0, 0.25),
         inset 0 1px 0 rgba(255,255,255,0.18);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+      transition: 0.16s ease;
     }
 
     .btn:hover {
       transform: translateY(-2px);
       box-shadow:
-        0 22px 42px rgba(255, 0, 0, 0.3),
+        0 22px 40px rgba(255, 0, 0, 0.3),
         inset 0 1px 0 rgba(255,255,255,0.18);
     }
 
     .btn:disabled {
-      opacity: 0.76;
+      opacity: 0.75;
       cursor: not-allowed;
       transform: none;
     }
@@ -379,16 +375,16 @@
     .status {
       min-height: 24px;
       margin-top: 10px;
-      color: var(--muted);
       font-size: 15px;
+      color: var(--muted);
     }
 
     .status.error {
-      color: #ff9191;
+      color: #ff8f8f;
     }
 
     .status.success {
-      color: #78efaf;
+      color: #81efb3;
     }
 
     .result-card {
@@ -408,7 +404,6 @@
     .result-card h3 {
       margin: 0 0 16px;
       font-size: 23px;
-      letter-spacing: -0.03em;
     }
 
     .pix-layout {
@@ -419,7 +414,7 @@
     }
 
     .qr-wrap {
-      background: #fff;
+      background: white;
       border-radius: 20px;
       padding: 14px;
       min-height: 220px;
@@ -444,9 +439,9 @@
       width: fit-content;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(39, 209, 127, 0.12);
-      color: #8df0b7;
-      border: 1px solid rgba(39, 209, 127, 0.18);
+      background: rgba(46, 212, 122, 0.12);
+      color: #95f0bb;
+      border: 1px solid rgba(46, 212, 122, 0.18);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-size: 12px;
@@ -454,10 +449,10 @@
     }
 
     .pix-code {
-      min-height: 130px;
+      min-height: 128px;
       padding: 16px;
       border-radius: 18px;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.24);
       border: 1px solid rgba(255,255,255,0.08);
       color: #efefef;
       font-size: 14px;
@@ -490,17 +485,17 @@
 
     .alt-btn:hover {
       transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.2);
     }
 
     .note {
-      color: #ab9d9d;
+      color: #aa9d9d;
       font-size: 13px;
       line-height: 1.7;
     }
 
     .section {
-      padding: 14px 0 70px;
+      padding: 10px 0 72px;
     }
 
     .section-head {
@@ -508,20 +503,20 @@
       align-items: end;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .section-head h3 {
       margin: 0;
-      font-size: clamp(28px, 4vw, 42px);
+      font-size: clamp(28px, 4vw, 44px);
       letter-spacing: -0.04em;
     }
 
     .section-head p {
       margin: 0;
       color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
+      line-height: 1.75;
+      max-width: 560px;
     }
 
     .cards-3 {
@@ -543,11 +538,11 @@
     .info-card::before {
       content: "";
       position: absolute;
-      inset: auto auto -50px -50px;
-      width: 140px;
-      height: 140px;
+      inset: auto auto -55px -55px;
+      width: 150px;
+      height: 150px;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,0,0,0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 0, 0, 0.12), transparent 70%);
       pointer-events: none;
     }
 
@@ -561,6 +556,151 @@
       color: var(--muted);
       line-height: 1.75;
       font-size: 15px;
+    }
+
+    .package-card {
+      padding: 30px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(24, 10, 10, 0.96), rgba(12, 7, 7, 0.95));
+      border: 1px solid rgba(255, 74, 74, 0.18);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(255,0,0,0.18), transparent 70%);
+      border-radius: 999px;
+      filter: blur(8px);
+    }
+
+    .package-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: start;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .package-top h4 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      letter-spacing: -0.04em;
+    }
+
+    .package-top p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 650px;
+    }
+
+    .package-price {
+      min-width: 220px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: right;
+    }
+
+    .package-price small {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .package-price strong {
+      font-size: 38px;
+      letter-spacing: -0.05em;
+    }
+
+    .package-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .package-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #f1ecec;
+      display: flex;
+      align-items: start;
+      gap: 12px;
+      line-height: 1.6;
+    }
+
+    .package-item::before {
+      content: "✓";
+      color: #7df0ab;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .review-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+    }
+
+    .stars {
+      color: #ffcc66;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .review-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .review-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ff4343, #8e0000);
+      font-weight: 900;
+    }
+
+    .review-user strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .review-user span {
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .faq {
@@ -597,14 +737,8 @@
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes rain {
@@ -612,8 +746,8 @@
         transform: translateY(-140px) rotate(12deg);
         opacity: 0;
       }
-      12% {
-        opacity: 0.28;
+      10% {
+        opacity: 0.25;
       }
       100% {
         transform: translateY(110vh) rotate(12deg);
@@ -621,35 +755,37 @@
       }
     }
 
-    @keyframes floatGlow {
-      from {
-        transform: translateY(-8px) translateX(0);
-      }
-      to {
-        transform: translateY(16px) translateX(18px);
-      }
+    @keyframes glowFloat {
+      from { transform: translateY(-8px) translateX(0); }
+      to { transform: translateY(16px) translateX(18px); }
     }
 
     @media (max-width: 980px) {
       .hero-grid,
       .cards-3,
-      .faq {
+      .reviews-grid,
+      .faq,
+      .package-list {
         grid-template-columns: 1fr;
       }
 
       .hero-copy {
         padding-top: 0;
       }
+
+      .package-price {
+        text-align: left;
+      }
     }
 
     @media (max-width: 760px) {
+      .container {
+        width: min(var(--max), calc(100% - 18px));
+      }
+
       .form-grid,
       .pix-layout {
         grid-template-columns: 1fr;
-      }
-
-      .container {
-        width: min(var(--max), calc(100% - 18px));
       }
 
       .form-card {
@@ -664,7 +800,7 @@
         font-size: 16px;
       }
 
-      .stat-card {
+      .mini-card {
         min-width: 100%;
       }
 
@@ -693,7 +829,7 @@
           </div>
         </div>
 
-        <div class="top-badge">Pagamento Pix</div>
+        <div class="top-pill">Pagamento Pix</div>
       </div>
     </div>
   </header>
@@ -703,83 +839,80 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <div class="top-badge">Checkout seguro</div>
+            <div class="top-pill">Checkout seguro</div>
             <h1>Gerar cobrança com visual premium.</h1>
             <p>
-              Uma página moderna, elegante e profissional para gerar o Pix do GhostRoot.
-              Assim que o pagamento for aprovado, o sistema continua enviando a confirmação
-              automática para o e-mail configurado no backend.
+              Uma página moderna, elegante e profissional para gerar o Pix do GhostRoot com
+              mais confiança, melhor apresentação e uma experiência visual muito mais forte.
             </p>
 
-            <div class="stats">
-              <div class="stat-card">
+            <div class="hero-cards">
+              <div class="mini-card">
                 <small>Valor único</small>
                 <strong>R$ 14,99</strong>
               </div>
-              <div class="stat-card">
-                <small>Liberação</small>
+              <div class="mini-card">
+                <small>Entrega</small>
                 <strong>Imediata</strong>
               </div>
             </div>
           </div>
 
-          <div class="hero-side">
-            <div class="glass-card form-card" id="pacote">
-              <h2>Gerar cobrança</h2>
-              <p>Preencha seus dados corretamente para gerar o QR Code e copiar o código Pix.</p>
+          <div class="glass-card form-card" id="pacote">
+            <h2>Gerar cobrança</h2>
+            <p>Preencha seus dados corretamente para gerar seu QR Code Pix e copiar o código.</p>
 
-              <form id="pixForm">
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="name">Nome</label>
-                    <input id="name" name="name" type="text" placeholder="Seu nome completo" required />
-                  </div>
-
-                  <div class="field">
-                    <label for="email">E-mail</label>
-                    <input id="email" name="email" type="email" placeholder="seuemail@gmail.com" required />
-                  </div>
-
-                  <div class="field">
-                    <label for="cpf">CPF (opcional)</label>
-                    <input id="cpf" name="cpf" type="text" placeholder="Somente números" />
-                  </div>
-
-                  <div class="field">
-                    <label for="product">Produto</label>
-                    <input id="product" name="product" type="text" value="GhostRoot" />
-                  </div>
-
-                  <div class="field full">
-                    <button class="btn" id="submitBtn" type="submit">Gerar Pix</button>
-                    <div class="status" id="status"></div>
-                  </div>
+            <form id="pixForm">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Nome</label>
+                  <input id="name" name="name" type="text" placeholder="Seu nome completo" required />
                 </div>
-              </form>
 
-              <div class="result-card" id="resultCard">
-                <h3>Pagamento gerado</h3>
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input id="email" name="email" type="email" placeholder="seuemail@gmail.com" required />
+                </div>
 
-                <div class="pix-layout">
-                  <div class="qr-wrap" id="qrBox">
-                    <span style="color:#222;font-weight:800;">QR Code</span>
+                <div class="field">
+                  <label for="cpf">CPF (opcional)</label>
+                  <input id="cpf" name="cpf" type="text" placeholder="Somente números" />
+                </div>
+
+                <div class="field">
+                  <label for="product">Produto</label>
+                  <input id="product" name="product" type="text" value="GhostRoot" />
+                </div>
+
+                <div class="field full">
+                  <button class="btn" id="submitBtn" type="submit">Gerar Pix</button>
+                  <div class="status" id="status"></div>
+                </div>
+              </div>
+            </form>
+
+            <div class="result-card" id="resultCard">
+              <h3>Pagamento gerado</h3>
+
+              <div class="pix-layout">
+                <div class="qr-wrap" id="qrBox">
+                  <span style="color:#222;font-weight:800;">QR Code</span>
+                </div>
+
+                <div class="pix-info">
+                  <div class="pill-success">Aguardando pagamento</div>
+
+                  <div class="pix-code" id="pixCodeBox">
+                    O código Pix aparecerá aqui.
                   </div>
 
-                  <div class="pix-info">
-                    <div class="pill-success">Aguardando pagamento</div>
+                  <div class="action-row">
+                    <button class="alt-btn" id="copyBtn" type="button">Copiar código Pix</button>
+                    <a class="alt-btn" id="ticketBtn" href="#" target="_blank" rel="noopener noreferrer">Abrir cobrança</a>
+                  </div>
 
-                    <div class="pix-code" id="pixCodeBox">
-                      O código Pix aparecerá aqui.
-                    </div>
-
-                    <div class="action-row">
-                      <button class="alt-btn" id="copyBtn" type="button">Copiar código Pix</button>
-                      <a class="alt-btn" id="ticketBtn" href="#" target="_blank" rel="noopener noreferrer">Abrir cobrança</a>
-                    </div>
-
-                    <div class="note">
-                      Após o pagamento, aguarde alguns instantes pela confirmação automática.
-                    </div>
+                  <div class="note">
+                    Após o pagamento, aguarde alguns instantes pela confirmação automática.
                   </div>
                 </div>
               </div>
@@ -792,65 +925,157 @@
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h3>Por que esse layout converte melhor</h3>
+          <h3>O que está incluso no pacote</h3>
           <p>
-            Estrutura mais limpa, foco no formulário, reforço visual do valor e aparência premium
-            para transmitir mais confiança.
+            Tudo o que o cliente precisa para ter uma experiência direta, rápida e com aparência profissional.
+          </p>
+        </div>
+
+        <div class="package-card">
+          <div class="package-top">
+            <div>
+              <h4>GhostRoot Premium Access</h4>
+              <p>
+                Estrutura pensada para apresentar melhor o produto, facilitar o pagamento e passar
+                mais credibilidade durante o processo de cobrança.
+              </p>
+            </div>
+
+            <div class="package-price">
+              <small>Pagamento único</small>
+              <strong>R$ 14,99</strong>
+            </div>
+          </div>
+
+          <div class="package-list">
+            <div class="package-item">Checkout premium com visual profissional e moderno</div>
+            <div class="package-item">Geração de QR Code Pix com resposta rápida</div>
+            <div class="package-item">Código Pix copiável com um clique</div>
+            <div class="package-item">Estrutura preparada para notificação automática</div>
+            <div class="package-item">Layout otimizado para desktop e celular</div>
+            <div class="package-item">Visual com fundo animado e aparência mais elegante</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h3>Por que esse layout é melhor</h3>
+          <p>
+            O foco não é só deixar bonito, mas melhorar a apresentação, a confiança visual e a experiência de compra.
           </p>
         </div>
 
         <div class="cards-3">
           <div class="info-card">
-            <h4>Visual profissional</h4>
+            <h4>Mais confiança</h4>
             <p>
-              Fundo animado, vidro fosco, contraste forte e blocos mais elegantes para passar uma
-              aparência mais premium.
+              Um layout mais refinado transmite mais seriedade e melhora a percepção do usuário na hora do pagamento.
             </p>
           </div>
 
           <div class="info-card">
-            <h4>Fluxo direto</h4>
+            <h4>Mais clareza</h4>
             <p>
-              O usuário entende rápido o valor, preenche os dados e gera o Pix sem distrações
-              desnecessárias.
+              Valor, formulário, QR Code e ações principais aparecem de forma organizada e fácil de entender.
             </p>
           </div>
 
           <div class="info-card">
-            <h4>Experiência completa</h4>
+            <h4>Mais conversão</h4>
             <p>
-              QR Code, código copiável e link da cobrança no mesmo lugar, com feedback visual mais bonito.
+              Visual premium, foco no produto e menos sensação de página improvisada ajudam o usuário a avançar.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h3>Avaliações</h3>
+          <p>
+            Uma seção visualmente forte para reforçar percepção de qualidade e dar mais peso ao projeto.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              Visual muito acima do padrão. Ficou com cara de página profissional de verdade e a cobrança ficou muito mais apresentável.
+            </p>
+            <div class="review-user">
+              <div class="avatar">V</div>
+              <div>
+                <strong>Victor F.</strong>
+                <span>Projeto premium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              O layout ficou mais bonito, organizado e com uma aparência muito mais confiável para enviar para outras pessoas.
+            </p>
+            <div class="review-user">
+              <div class="avatar">R</div>
+              <div>
+                <strong>Rafael M.</strong>
+                <span>Checkout Pix</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              A parte do QR Code e do copiar código ficou muito mais elegante. Agora realmente parece um sistema bem acabado.
+            </p>
+            <div class="review-user">
+              <div class="avatar">L</div>
+              <div>
+                <strong>Lucas A.</strong>
+                <span>Design premium</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h3>Perguntas frequentes</h3>
+          <p>
+            Respostas rápidas para deixar a página mais completa e mais profissional visualmente.
+          </p>
         </div>
 
         <div class="faq">
           <div class="faq-item">
-            <strong>Como recebo o pagamento?</strong>
-            <span>
-              O pagamento continua sendo processado pelo backend já conectado ao Mercado Pago.
-            </span>
-          </div>
-
-          <div class="faq-item">
             <strong>O valor está correto?</strong>
-            <span>
-              Sim. A página foi ajustada para exibir e enviar o valor de R$ 14,99 corretamente.
-            </span>
+            <span>Sim. A estrutura foi ajustada para trabalhar corretamente com o valor de R$ 14,99.</span>
           </div>
 
           <div class="faq-item">
-            <strong>Posso copiar o código Pix?</strong>
-            <span>
-              Sim. Assim que a cobrança for criada, você pode copiar o código ou abrir a cobrança em outra aba.
-            </span>
+            <strong>Recebo QR Code e código Pix?</strong>
+            <span>Sim. Assim que a cobrança é gerada, a página mostra o QR Code e o código para copiar.</span>
           </div>
 
           <div class="faq-item">
-            <strong>A confirmação é automática?</strong>
-            <span>
-              Sim. Quando o pagamento for aprovado, o sistema pode confirmar e enviar a notificação configurada.
-            </span>
+            <strong>Funciona em celular?</strong>
+            <span>Sim. O layout foi feito para se adaptar bem em desktop e dispositivos móveis.</span>
+          </div>
+
+          <div class="faq-item">
+            <strong>A confirmação pode ser automática?</strong>
+            <span>Sim. O backend continua preparado para processar a resposta do pagamento e a notificação configurada.</span>
           </div>
         </div>
       </div>
