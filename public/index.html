@@ -3,103 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GhostRoot Premium Project</title>
+  <title>GhostRoot | Ultra Premium Checkout</title>
+  <meta name="description" content="GhostRoot com layout ultra premium, animações sofisticadas de fundo e checkout Pix de alto impacto visual." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #070707;
-      --bg-2: #110909;
-      --card: rgba(18, 9, 9, 0.84);
-      --card-2: rgba(25, 10, 10, 0.94);
-      --line: rgba(255, 255, 255, 0.08);
-      --line-red: rgba(255, 70, 70, 0.16);
-      --text: #f5f3f3;
-      --muted: #b6a8a8;
-      --primary: #ff2e2e;
-      --primary-dark: #b60000;
-      --success: #2ed47a;
-      --gold: #ffcb61;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --max: 1180px;
+      --bg: #040405;
+      --bg-2: #090507;
+      --panel: rgba(16, 11, 14, 0.72);
+      --panel-strong: rgba(19, 11, 14, 0.9);
+      --panel-soft: rgba(255,255,255,0.035);
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,76,76,0.24);
+      --text: #fff6f7;
+      --muted: #bfafb3;
+      --muted-2: #86757b;
+      --primary: #ff3434;
+      --primary-2: #920000;
+      --accent: #ff8b8b;
+      --success: #84f0b3;
+      --gold: #ffd768;
+      --shadow: 0 30px 80px rgba(0,0,0,0.42);
+      --shadow-soft: 0 20px 50px rgba(0,0,0,0.28);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1240px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 10%, rgba(255, 0, 0, 0.12), transparent 22%),
-        radial-gradient(circle at 88% 16%, rgba(255, 0, 0, 0.08), transparent 18%),
-        linear-gradient(180deg, #070707 0%, #120808 48%, #070707 100%);
-      overflow-x: hidden;
+        radial-gradient(circle at 10% 10%, rgba(255, 50, 50, 0.16), transparent 22%),
+        radial-gradient(circle at 90% 0%, rgba(255, 30, 30, 0.12), transparent 24%),
+        radial-gradient(circle at 50% 110%, rgba(255, 0, 0, 0.10), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 44%, #040404 100%);
       min-height: 100vh;
+      overflow-x: hidden;
       position: relative;
     }
 
-    .bg-grid,
-    .bg-glow,
-    .bg-lines {
+    body::before,
+    body::after {
+      content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
     }
 
-    .bg-grid {
+    body::before {
       background-image:
-        linear-gradient(rgba(255, 0, 0, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: 0.26;
+        linear-gradient(rgba(255, 60, 60, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 60, 60, 0.03) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 94%);
+      animation: gridShift 14s linear infinite;
     }
 
-    .bg-glow::before,
-    .bg-glow::after {
+    body::after {
+      background: linear-gradient(to bottom, transparent, rgba(255,0,0,0.05), transparent);
+      opacity: 0.38;
+      animation: scan 10s linear infinite;
+    }
+
+    .bg-layer,
+    .beam-layer,
+    .ring-layer,
+    .particle-layer,
+    .noise-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .noise-layer {
+      opacity: 0.03;
+      background-image: radial-gradient(rgba(255,255,255,0.6) 0.45px, transparent 0.55px);
+      background-size: 9px 9px;
+    }
+
+    .bg-layer::before,
+    .bg-layer::after {
       content: "";
       position: absolute;
-      width: 460px;
-      height: 460px;
-      border-radius: 999px;
-      filter: blur(90px);
-      opacity: 0.15;
-      animation: floatGlow 9s ease-in-out infinite alternate;
+      width: 52vw;
+      height: 52vw;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.14;
     }
 
-    .bg-glow::before {
-      left: -120px;
-      top: -80px;
-      background: #ff2020;
+    .bg-layer::before {
+      top: -18vw;
+      left: -12vw;
+      background: radial-gradient(circle, rgba(255,70,70,0.45), transparent 62%);
+      animation: driftGlow 18s ease-in-out infinite alternate;
     }
 
-    .bg-glow::after {
-      right: -120px;
-      top: 160px;
-      background: #850000;
-      animation-delay: 1.4s;
+    .bg-layer::after {
+      right: -20vw;
+      bottom: -16vw;
+      background: radial-gradient(circle, rgba(145,0,0,0.42), transparent 64%);
+      animation: driftGlow 22s ease-in-out infinite alternate-reverse;
     }
 
-    .bg-lines span {
+    .ring {
       position: absolute;
-      width: 2px;
-      height: 90px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
-      opacity: 0.18;
-      transform: rotate(12deg);
-      animation: drift 10s linear infinite;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 110, 110, 0.08);
+      box-shadow: inset 0 0 40px rgba(255,0,0,0.03), 0 0 30px rgba(255,0,0,0.04);
+      animation: rotateSlow linear infinite;
     }
 
-    .bg-lines span:nth-child(1) { left: 10%; top: -10%; animation-delay: 0s; }
-    .bg-lines span:nth-child(2) { left: 22%; top: -25%; animation-delay: 1.8s; }
-    .bg-lines span:nth-child(3) { left: 36%; top: -18%; animation-delay: 3.1s; }
-    .bg-lines span:nth-child(4) { left: 54%; top: -12%; animation-delay: 1s; }
-    .bg-lines span:nth-child(5) { left: 68%; top: -22%; animation-delay: 2.7s; }
-    .bg-lines span:nth-child(6) { left: 84%; top: -16%; animation-delay: 4.4s; }
+    .ring.one {
+      width: 760px; height: 760px; top: -220px; right: -140px; animation-duration: 36s;
+    }
+    .ring.two {
+      width: 520px; height: 520px; bottom: 6%; left: -180px; animation-duration: 28s; animation-direction: reverse;
+    }
+    .ring.three {
+      width: 320px; height: 320px; top: 24%; right: 12%; animation-duration: 18s;
+    }
+
+    .beam {
+      position: absolute;
+      height: 2px;
+      border-radius: 999px;
+      transform: rotate(-18deg);
+      background: linear-gradient(90deg, transparent, rgba(255,80,80,0.88), rgba(255,255,255,0.42), transparent);
+      box-shadow: 0 0 14px rgba(255,60,60,0.2), 0 0 34px rgba(255,0,0,0.12);
+      opacity: 0.75;
+      animation: beamSlide linear infinite;
+    }
+
+    .beam.soft {
+      height: 1px;
+      opacity: 0.42;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.56), transparent);
+      box-shadow: 0 0 12px rgba(255,255,255,0.08);
+    }
+
+    .beam.b1 { width: 46vw; top: 12%; left: -40%; animation-duration: 15s; }
+    .beam.b2 { width: 35vw; top: 28%; left: -34%; animation-duration: 19s; animation-delay: -8s; }
+    .beam.b3 { width: 42vw; top: 62%; left: -36%; animation-duration: 17s; animation-delay: -4s; }
+    .beam.b4 { width: 28vw; top: 20%; right: -30%; transform: rotate(18deg); animation-duration: 16s; animation-delay: -10s; }
+    .beam.b5 { width: 36vw; top: 48%; right: -38%; transform: rotate(18deg); animation-duration: 20s; animation-delay: -3s; }
+    .beam.b6 { width: 24vw; top: 80%; right: -26%; transform: rotate(18deg); animation-duration: 22s; animation-delay: -12s; }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,245,245,0.92);
+      box-shadow: 0 0 10px rgba(255,255,255,0.16), 0 0 24px rgba(255,0,0,0.12);
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+
+    .particle:nth-child(1){left:4%;animation-duration:10s;animation-delay:-2s}
+    .particle:nth-child(2){left:10%;animation-duration:12s;animation-delay:-9s}
+    .particle:nth-child(3){left:18%;animation-duration:14s;animation-delay:-5s}
+    .particle:nth-child(4){left:27%;animation-duration:11s;animation-delay:-8s}
+    .particle:nth-child(5){left:36%;animation-duration:16s;animation-delay:-12s}
+    .particle:nth-child(6){left:46%;animation-duration:10s;animation-delay:-6s}
+    .particle:nth-child(7){left:58%;animation-duration:13s;animation-delay:-3s}
+    .particle:nth-child(8){left:69%;animation-duration:15s;animation-delay:-10s}
+    .particle:nth-child(9){left:79%;animation-duration:11s;animation-delay:-4s}
+    .particle:nth-child(10){left:89%;animation-duration:14s;animation-delay:-7s}
+    .particle:nth-child(11){left:95%;animation-duration:17s;animation-delay:-14s}
 
     .container {
       width: min(var(--max), calc(100% - 32px));
@@ -109,13 +190,19 @@
     }
 
     .header {
-      padding: 24px 0 10px;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(6, 6, 8, 0.52);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .nav {
+      min-height: 84px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
@@ -126,208 +213,232 @@
     }
 
     .brand-badge {
-      width: 62px;
-      height: 62px;
+      width: 60px;
+      height: 60px;
       border-radius: 20px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #ff4444, #930000);
-      font-weight: 900;
-      font-size: 24px;
-      box-shadow: 0 16px 36px rgba(255, 0, 0, 0.28);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.04;
-    }
-
-    .brand-text strong {
+      background: linear-gradient(135deg, #ff5555, #8f0000);
+      box-shadow: 0 18px 38px rgba(255,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.18);
       font-size: 22px;
-      letter-spacing: 0.12em;
+      font-weight: 900;
+      letter-spacing: 0.04em;
     }
 
-    .brand-text span {
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      font-weight: 700;
-    }
+    .brand-copy { display: flex; flex-direction: column; gap: 4px; line-height: 1; }
+    .brand-copy strong { font-size: 19px; letter-spacing: 0.22em; }
+    .brand-copy span { color: var(--muted); font-size: 11px; letter-spacing: 0.26em; font-weight: 700; }
 
-    .top-pill {
+    .nav-cta {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 18px;
+      padding: 14px 18px;
       border-radius: 999px;
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255, 70, 70, 0.14);
-      color: #ffd7d7;
+      border: 1px solid rgba(255,90,90,0.16);
+      color: #ffe0e0;
       font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
       font-weight: 800;
-      backdrop-filter: blur(12px);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
 
-    .top-pill::before {
+    .nav-cta::before {
       content: "";
       width: 8px;
       height: 8px;
-      border-radius: 999px;
-      background: #ff3232;
-      box-shadow: 0 0 16px #ff3232;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 16px var(--primary);
     }
 
     .hero {
-      padding: 24px 0 34px;
+      position: relative;
+      padding: 44px 0 34px;
     }
 
-    .hero-box {
+    .hero-layout {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
-      gap: 28px;
+      gap: 30px;
       align-items: start;
     }
 
-    .hero-left {
-      padding-top: 10px;
+    .hero-copy {
+      position: relative;
+      padding-top: 18px;
     }
 
-    .hero-left h1 {
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255, 90, 90, 0.14);
+      color: #ffd7d7;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 14px var(--primary);
+    }
+
+    h1 {
       margin: 18px 0 18px;
-      font-size: clamp(42px, 7vw, 82px);
-      line-height: 0.94;
-      letter-spacing: -0.055em;
+      font-size: clamp(48px, 7.4vw, 92px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
       max-width: 760px;
+      text-shadow: 0 0 26px rgba(255,0,0,0.08);
     }
 
-    .hero-left p {
+    .hero-copy p {
       margin: 0;
+      max-width: 720px;
       color: var(--muted);
-      font-size: 18px;
-      line-height: 1.8;
-      max-width: 710px;
+      font-size: 19px;
+      line-height: 1.85;
     }
 
-    .hero-inline {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 28px;
     }
 
-    .hero-chip {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--line);
-      color: #f7efef;
-      font-weight: 700;
-      font-size: 14px;
+    .btn-primary,
+    .btn-secondary,
+    .stat-chip,
+    .mini-panel,
+    .glass,
+    .info-card,
+    .review-card,
+    .faq-item,
+    .marquee-track {
+      box-shadow: var(--shadow-soft);
     }
 
-    .package-preview {
-      margin-top: 24px;
-      padding: 22px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(24, 10, 10, 0.94), rgba(14, 7, 7, 0.95));
-      border: 1px solid var(--line-red);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
+    .btn-primary,
+    .btn-secondary {
+      min-height: 58px;
+      padding: 0 24px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 800;
+      transition: .22s ease;
     }
 
-    .package-preview::after {
-      content: "";
-      position: absolute;
-      right: -60px;
-      top: -60px;
-      width: 180px;
-      height: 180px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,0,0,0.18), transparent 70%);
-      filter: blur(10px);
-    }
-
-    .package-preview-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .package-preview-top h3 {
-      margin: 0 0 8px;
-      font-size: 28px;
-      letter-spacing: -0.04em;
-    }
-
-    .package-preview-top p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
-      max-width: 580px;
-    }
-
-    .price-badge {
-      min-width: 220px;
-      padding: 16px 18px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.04);
+    .btn-primary {
+      background: linear-gradient(180deg, #ff4d4d 0%, #bc0000 100%);
+      color: white;
       border: 1px solid rgba(255,255,255,0.08);
-      text-align: right;
+      box-shadow: 0 18px 40px rgba(255,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18);
     }
 
-    .price-badge small {
+    .btn-secondary {
+      color: white;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .info-card:hover,
+    .review-card:hover,
+    .faq-item:hover,
+    .glass:hover,
+    .mini-panel:hover {
+      transform: translateY(-4px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+      max-width: 780px;
+    }
+
+    .stat-chip {
+      padding: 18px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .stat-chip strong {
       display: block;
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 28px;
+      letter-spacing: -0.05em;
       margin-bottom: 6px;
     }
 
-    .price-badge strong {
-      font-size: 38px;
-      letter-spacing: -0.05em;
-    }
+    .stat-chip span { color: var(--muted); font-size: 14px; line-height: 1.55; }
 
-    .package-list {
+    .mini-panels {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+      max-width: 780px;
     }
 
-    .package-item {
-      display: flex;
-      gap: 10px;
-      align-items: start;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      line-height: 1.6;
-      color: #f2eded;
-      font-size: 14px;
+    .mini-panel {
+      position: relative;
+      padding: 18px 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      transition: .22s ease;
     }
 
-    .package-item::before {
-      content: "✓";
-      color: #82efb1;
-      font-weight: 900;
+    .mini-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 34%, transparent 70%, rgba(255,0,0,0.08));
+      pointer-events: none;
+    }
+
+    .mini-panel strong { display: block; margin-bottom: 8px; font-size: 16px; }
+    .mini-panel span { color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+    .hero-side {
+      position: relative;
     }
 
     .glass {
-      background: linear-gradient(180deg, rgba(22, 10, 10, 0.95), rgba(12, 7, 7, 0.96));
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line-red);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
       position: relative;
       overflow: hidden;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(20, 11, 14, 0.94), rgba(11, 8, 10, 0.96));
+      border: 1px solid var(--line-strong);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      transition: .24s ease;
     }
 
     .glass::before {
@@ -335,25 +446,82 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.05), transparent 30%, transparent 70%, rgba(255,0,0,0.06));
+        linear-gradient(135deg, rgba(255,255,255,0.05), transparent 26%, transparent 74%, rgba(255,0,0,0.08)),
+        radial-gradient(circle at top right, rgba(255,80,80,0.1), transparent 30%);
       pointer-events: none;
     }
 
+    .checkout-top {
+      padding: 22px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .checkout-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #ffdddd;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .checkout-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+    }
+
+    .price-badge {
+      min-width: 190px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: right;
+    }
+
+    .price-badge small { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .price-badge strong { font-size: 38px; letter-spacing: -0.05em; }
+
     .form-card {
-      padding: 28px;
+      padding: 8px 24px 24px;
+      position: relative;
+      z-index: 1;
     }
 
-    .form-card h2 {
-      margin: 0 0 8px;
-      font-size: 34px;
-      letter-spacing: -0.04em;
+    .form-card h2 { margin: 18px 0 8px; font-size: 36px; letter-spacing: -0.04em; }
+    .form-card p { margin: 0 0 22px; color: var(--muted); line-height: 1.75; font-size: 14px; }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .form-card p {
-      margin: 0 0 22px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
+    .trust-item {
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+      color: #f6eeee;
+      line-height: 1.55;
     }
 
     .form-grid {
@@ -362,21 +530,9 @@
       gap: 16px;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      font-size: 15px;
-      font-weight: 700;
-      color: #f2e7e7;
-    }
+    .field { display: flex; flex-direction: column; gap: 10px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-size: 15px; font-weight: 700; color: #f5ebeb; }
 
     input {
       width: 100%;
@@ -388,76 +544,49 @@
       font-size: 17px;
       padding: 0 18px;
       outline: none;
-      transition: 0.18s ease;
+      transition: .18s ease;
     }
 
-    input::placeholder {
-      color: #8d7c7c;
-    }
-
+    input::placeholder { color: #89797d; }
     input:focus {
-      border-color: rgba(255, 85, 85, 0.45);
-      box-shadow: 0 0 0 4px rgba(255, 0, 0, 0.08);
+      border-color: rgba(255, 90, 90, 0.46);
+      box-shadow: 0 0 0 4px rgba(255,0,0,0.08);
       transform: translateY(-1px);
     }
 
     .btn {
       width: 100%;
-      height: 64px;
+      height: 66px;
       border: 0;
       border-radius: 18px;
-      background: linear-gradient(180deg, #ff3d3d 0%, #c00000 100%);
+      background: linear-gradient(180deg, #ff4949 0%, #bb0000 100%);
       color: white;
       font-size: 20px;
       font-weight: 900;
       cursor: pointer;
-      box-shadow:
-        0 18px 36px rgba(255, 0, 0, 0.24),
-        inset 0 1px 0 rgba(255,255,255,0.18);
-      transition: 0.16s ease;
+      box-shadow: 0 20px 40px rgba(255,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.18);
+      transition: .16s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 22px 40px rgba(255, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255,255,255,0.18);
-    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:disabled { opacity: 0.75; cursor: not-allowed; transform: none; }
 
-    .btn:disabled {
-      opacity: 0.75;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .status {
-      min-height: 24px;
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
+    .status { min-height: 24px; margin-top: 10px; color: var(--muted); font-size: 15px; }
     .status.error { color: #ff9191; }
-    .status.success { color: #82efb1; }
+    .status.success { color: var(--success); }
 
     .result-card {
       margin-top: 22px;
       padding: 22px;
-      border-radius: 22px;
+      border-radius: 24px;
       background: rgba(255,255,255,0.035);
       border: 1px solid rgba(255,255,255,0.08);
       display: none;
-      animation: fadeUp 0.28s ease;
+      animation: fadeUp .28s ease;
     }
 
-    .result-card.show {
-      display: block;
-    }
-
-    .result-card h3 {
-      margin: 0 0 16px;
-      font-size: 23px;
-    }
+    .result-card.show { display: block; }
+    .result-card h3 { margin: 0 0 16px; font-size: 24px; }
 
     .pix-layout {
       display: grid;
@@ -468,33 +597,25 @@
 
     .qr-wrap {
       background: white;
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 14px;
       min-height: 220px;
       display: grid;
       place-items: center;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.16);
     }
 
-    .qr-wrap img {
-      max-width: 190px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .qr-wrap img { max-width: 190px; width: 100%; height: auto; display: block; }
 
-    .pix-info {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .pix-info { display: flex; flex-direction: column; gap: 14px; }
 
     .pill-success {
       width: fit-content;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(46, 212, 122, 0.12);
-      color: #8ef0b7;
-      border: 1px solid rgba(46, 212, 122, 0.18);
+      background: rgba(46,212,122,0.12);
+      color: #96f2bd;
+      border: 1px solid rgba(46,212,122,0.18);
       font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -513,11 +634,7 @@
       word-break: break-word;
     }
 
-    .action-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+    .action-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
     .alt-btn {
       height: 52px;
@@ -533,16 +650,51 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: 0.16s ease;
+      transition: .16s ease;
     }
 
-    .alt-btn:hover {
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,0.22);
+    .alt-btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.22); }
+
+    .marquee-wrap {
+      margin-top: 26px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+      padding: 14px 0;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 22px;
+      color: #f8eded;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .marquee-item::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 12px var(--primary);
     }
 
     .section {
-      padding: 8px 0 70px;
+      padding: 18px 0 80px;
+      position: relative;
+      z-index: 2;
     }
 
     .section-head {
@@ -553,104 +705,91 @@
       margin-bottom: 24px;
     }
 
-    .section-head h3 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: -0.04em;
-    }
+    .section-title { display: flex; flex-direction: column; gap: 10px; }
+    .section-head h3 { margin: 0; font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.04em; }
+    .section-head p { margin: 0; max-width: 560px; color: var(--muted); line-height: 1.8; }
 
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 560px;
-    }
+    .eyebrow.small { padding: 9px 14px; font-size: 11px; }
 
     .cards-3,
     .reviews-grid,
-    .faq {
+    .faq-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
+
+    .cards-3,
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+    .faq-grid { grid-template-columns: repeat(2, 1fr); }
 
     .info-card,
     .review-card,
     .faq-item {
+      position: relative;
+      overflow: hidden;
       padding: 24px;
       border-radius: 24px;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow);
+      transition: .22s ease;
+    }
+
+    .info-card::before,
+    .review-card::before,
+    .faq-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 34%, transparent 75%, rgba(255,0,0,0.06));
+      pointer-events: none;
     }
 
     .info-card h4,
-    .faq-item strong {
-      margin: 0 0 12px;
-      font-size: 20px;
-    }
-
+    .faq-item strong { margin: 0 0 12px; font-size: 21px; position: relative; z-index: 1; }
     .info-card p,
-    .faq-item span {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 15px;
-    }
+    .faq-item span,
+    .review-card p { margin: 0; color: var(--muted); line-height: 1.8; font-size: 15px; position: relative; z-index: 1; }
 
-    .reviews-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .stars {
-      color: var(--gold);
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-    }
-
-    .review-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .review-user {
-      display: flex;
-      gap: 12px;
+    .card-number {
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255,82,82,0.24), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #fff0f0;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
     }
 
+    .stars { color: var(--gold); font-size: 18px; letter-spacing: 0.08em; margin-bottom: 14px; position: relative; z-index: 1; }
+    .review-card p { margin-bottom: 18px; }
+    .review-user { display: flex; gap: 12px; align-items: center; position: relative; z-index: 1; }
     .avatar {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 999px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #ff4a4a, #930000);
+      background: linear-gradient(135deg, #ff4b4b, #910000);
       font-weight: 900;
+      box-shadow: 0 12px 24px rgba(255,0,0,0.18);
     }
 
-    .review-user strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .review-user span {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .faq {
-      grid-template-columns: 1fr 1fr;
-    }
+    .review-user strong { display: block; font-size: 15px; }
+    .review-user span { color: var(--muted); font-size: 13px; }
 
     .footer {
-      padding: 24px 0 40px;
+      padding: 24px 0 42px;
       text-align: center;
-      color: #8d8181;
+      color: #8d8085;
       font-size: 14px;
+      position: relative;
+      z-index: 2;
     }
 
     @keyframes fadeUp {
@@ -658,89 +797,109 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes drift {
-      0% {
-        transform: translateY(-140px) rotate(12deg);
-        opacity: 0;
-      }
-      10% { opacity: 0.18; }
-      100% {
-        transform: translateY(110vh) rotate(12deg);
-        opacity: 0;
-      }
+    @keyframes gridShift {
+      from { transform: translateY(0); }
+      to { transform: translateY(46px); }
     }
 
-    @keyframes floatGlow {
-      from { transform: translateY(-10px) translateX(0); }
-      to { transform: translateY(18px) translateX(18px); }
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
     }
 
-    @media (max-width: 980px) {
-      .hero-box,
+    @keyframes driftGlow {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(30px, 28px, 0) scale(1.08); }
+    }
+
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes beamSlide {
+      0% { transform: translateX(0) rotate(-18deg); opacity: 0; }
+      12% { opacity: .8; }
+      100% { transform: translateX(130vw) rotate(-18deg); opacity: 0; }
+    }
+
+    .beam[style*="rotate(18deg)"] { animation-name: beamSlideRight; }
+
+    @keyframes beamSlideRight {
+      0% { transform: translateX(0) rotate(18deg); opacity: 0; }
+      12% { opacity: .8; }
+      100% { transform: translateX(-130vw) rotate(18deg); opacity: 0; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-16vh) scale(.7); opacity: 0; }
+      10% { opacity: .85; }
+      100% { transform: translateY(112vh) scale(1.1); opacity: 0; }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-layout,
       .cards-3,
       .reviews-grid,
-      .faq,
-      .package-list {
-        grid-template-columns: 1fr;
-      }
+      .faq-grid,
+      .hero-stats,
+      .mini-panels { grid-template-columns: 1fr; }
 
-      .hero-left { padding-top: 0; }
       .price-badge { text-align: left; }
+      .trust-row { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
-      .container {
-        width: min(var(--max), calc(100% - 18px));
-      }
-
+      .container { width: min(var(--max), calc(100% - 18px)); }
+      .nav { min-height: 76px; }
+      .brand-copy strong { font-size: 16px; letter-spacing: 0.16em; }
       .form-grid,
-      .pix-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-left h1 {
-        font-size: 48px;
-      }
-
-      .hero-left p {
-        font-size: 16px;
-      }
-
-      .section-head {
-        flex-direction: column;
-        align-items: start;
-      }
-
-      .form-card {
-        padding: 20px;
-      }
-
-      .mini-card,
-      .price-badge {
-        min-width: 100%;
-      }
+      .pix-layout { grid-template-columns: 1fr; }
+      h1 { font-size: 48px; }
+      .hero-copy p { font-size: 16px; }
+      .section-head { flex-direction: column; align-items: start; }
+      .checkout-top,
+      .form-card { padding-left: 18px; padding-right: 18px; }
+      .beam { width: 70vw; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
-  <div class="bg-lines">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
+  <div class="bg-layer"></div>
+  <div class="ring-layer">
+    <div class="ring one"></div>
+    <div class="ring two"></div>
+    <div class="ring three"></div>
   </div>
+  <div class="beam-layer">
+    <div class="beam b1"></div>
+    <div class="beam soft b2"></div>
+    <div class="beam b3"></div>
+    <div class="beam soft b4" style="transform: rotate(18deg);"></div>
+    <div class="beam b5" style="transform: rotate(18deg);"></div>
+    <div class="beam soft b6" style="transform: rotate(18deg);"></div>
+  </div>
+  <div class="particle-layer">
+    <span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span><span class="particle"></span>
+  </div>
+  <div class="noise-layer"></div>
 
   <header class="header">
     <div class="container">
       <div class="nav">
         <div class="brand">
           <div class="brand-badge">GR</div>
-          <div class="brand-text">
+          <div class="brand-copy">
             <strong>GHOSTROOT</strong>
-            <span>PREMIUM PROJECT</span>
+            <span>ULTRA PREMIUM PROJECT</span>
           </div>
         </div>
-
-        <div class="top-pill">Pagamento Pix</div>
+        <div class="nav-cta">Checkout Pix ativo</div>
       </div>
     </div>
   </header>
@@ -748,96 +907,123 @@
   <main>
     <section class="hero">
       <div class="container">
-        <div class="hero-box">
-          <div class="hero-left">
-            <div class="top-pill">Acesso premium</div>
-            <h1>GhostRoot com apresentação realmente profissional.</h1>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow">Experiência cinematográfica</div>
+            <h1>Um checkout que parece produto de elite.</h1>
             <p>
-              Uma página com estrutura mais séria, visual mais premium e foco real em conversão.
-              Valor claro, pacote bem apresentado, prova social, checkout bonito e área de pagamento melhor organizada.
+              Apresentação premium, leitura rápida e um checkout com presença forte para valorizar a oferta
+              e deixar a experiência mais bonita, mais clara e mais profissional.
             </p>
 
-            <div class="hero-inline">
-              <div class="hero-chip">Layout premium</div>
-              <div class="hero-chip">Pix imediato</div>
-              <div class="hero-chip">Experiência profissional</div>
+            <div class="hero-actions">
+              <a class="btn-primary" href="#pacote">Gerar Pix agora</a>
+              <a class="btn-secondary" href="#beneficios">Ver diferenciais</a>
             </div>
 
-            <div class="package-preview">
-              <div class="package-preview-top">
-                <div>
-                  <h3>GhostRoot Premium Access</h3>
-                  <p>
-                    Página de cobrança com aparência mais forte, melhor organização e uma apresentação mais profissional para enviar para qualquer pessoa.
-                  </p>
-                </div>
+            <div class="hero-stats">
+              <div class="stat-chip">
+                <strong>+Premium</strong>
+                <span>Mais impacto visual, mais presença e sensação de produto sério.</span>
+              </div>
+              <div class="stat-chip">
+                <strong>+Clareza</strong>
+                <span>Informação mais organizada para valor, oferta e pagamento aparecerem melhor.</span>
+              </div>
+              <div class="stat-chip">
+                <strong>+Fluxo</strong>
+                <span>Entrada, geração do Pix e leitura do resultado com menos ruído visual.</span>
+              </div>
+            </div>
 
+            <div class="mini-panels">
+              <div class="mini-panel">
+                <strong>Movimento no fundo sem poluir</strong>
+                <span>Feixes, glow, grid e partículas em camadas para passar sensação premium contínua.</span>
+              </div>
+              <div class="mini-panel">
+                <strong>Checkout protagonista</strong>
+                <span>O card principal agora parece uma peça de produto, não só um formulário solto.</span>
+              </div>
+            </div>
+
+            <div class="marquee-wrap">
+              <div class="marquee-track">
+                <div class="marquee-item">Layout premium</div>
+                <div class="marquee-item">Animação de fundo</div>
+                <div class="marquee-item">Checkout elegante</div>
+                <div class="marquee-item">Glow cinematográfico</div>
+                <div class="marquee-item">Experiência responsiva</div>
+                <div class="marquee-item">Percepção de valor</div>
+                <div class="marquee-item">Layout premium</div>
+                <div class="marquee-item">Animação de fundo</div>
+                <div class="marquee-item">Checkout elegante</div>
+                <div class="marquee-item">Glow cinematográfico</div>
+                <div class="marquee-item">Experiência responsiva</div>
+                <div class="marquee-item">Percepção de valor</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="glass" id="pacote">
+              <div class="checkout-top">
+                <div class="checkout-badge">Pagamento instantâneo</div>
                 <div class="price-badge">
                   <small>Pagamento único</small>
                   <strong>R$ 14,99</strong>
                 </div>
               </div>
 
-              <div class="package-list">
-                <div class="package-item">Checkout visualmente premium</div>
-                <div class="package-item">QR Code Pix gerado na hora</div>
-                <div class="package-item">Código Pix copiável</div>
-                <div class="package-item">Interface profissional em celular e desktop</div>
-              </div>
-            </div>
-          </div>
+              <div class="form-card">
+                <h2>Gerar cobrança</h2>
+                <p>Preencha abaixo para liberar o Pix com QR Code, código copiável e abertura rápida da cobrança.</p>
 
-          <div class="glass form-card" id="pacote">
-            <h2>Gerar cobrança</h2>
-            <p>Preencha os dados abaixo para gerar o pagamento Pix do GhostRoot.</p>
-
-            <form id="pixForm">
-              <div class="form-grid">
-                <div class="field">
-                  <label for="name">Nome</label>
-                  <input id="name" name="name" type="text" placeholder="Seu nome completo" required />
+                <div class="trust-row">
+                  <div class="trust-item">APK Mod incluso</div>
+                  <div class="trust-item">Holograma Color</div>
+                  <div class="trust-item">FOV 200%</div>
                 </div>
 
-                <div class="field">
-                  <label for="email">E-mail</label>
-                  <input id="email" name="email" type="email" placeholder="seuemail@gmail.com" required />
-                </div>
-
-                <div class="field">
-                  <label for="cpf">CPF (opcional)</label>
-                  <input id="cpf" name="cpf" type="text" placeholder="Somente números" />
-                </div>
-
-                <div class="field">
-                  <label for="product">Produto</label>
-                  <input id="product" name="product" type="text" value="GhostRoot" />
-                </div>
-
-                <div class="field full">
-                  <button class="btn" id="submitBtn" type="submit">Gerar Pix</button>
-                  <div class="status" id="status"></div>
-                </div>
-              </div>
-            </form>
-
-            <div class="result-card" id="resultCard">
-              <h3>Pagamento gerado</h3>
-
-              <div class="pix-layout">
-                <div class="qr-wrap" id="qrBox">
-                  <span style="color:#222;font-weight:800;">QR Code</span>
-                </div>
-
-                <div class="pix-info">
-                  <div class="pill-success">Aguardando pagamento</div>
-
-                  <div class="pix-code" id="pixCodeBox">
-                    O código Pix aparecerá aqui.
+                <form id="pixForm">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="name">Nome</label>
+                      <input id="name" name="name" type="text" placeholder="Seu nome completo" required />
+                    </div>
+                    <div class="field">
+                      <label for="email">E-mail</label>
+                      <input id="email" name="email" type="email" placeholder="seuemail@gmail.com" required />
+                    </div>
+                    <div class="field">
+                      <label for="cpf">CPF (opcional)</label>
+                      <input id="cpf" name="cpf" type="text" placeholder="Somente números" />
+                    </div>
+                    <div class="field">
+                      <label for="product">Produto</label>
+                      <input id="product" name="product" type="text" value="GhostRoot" />
+                    </div>
+                    <div class="field full">
+                      <button class="btn" id="submitBtn" type="submit">Gerar Pix agora</button>
+                      <div class="status" id="status"></div>
+                    </div>
                   </div>
+                </form>
 
-                  <div class="action-row">
-                    <button class="alt-btn" id="copyBtn" type="button">Copiar código Pix</button>
-                    <a class="alt-btn" id="ticketBtn" href="#" target="_blank" rel="noopener noreferrer">Abrir cobrança</a>
+                <div class="result-card" id="resultCard">
+                  <h3>Pagamento gerado</h3>
+                  <div class="pix-layout">
+                    <div class="qr-wrap" id="qrBox">
+                      <span style="color:#222;font-weight:800;">QR Code</span>
+                    </div>
+                    <div class="pix-info">
+                      <div class="pill-success">Aguardando pagamento</div>
+                      <div class="pix-code" id="pixCodeBox">O código Pix aparecerá aqui.</div>
+                      <div class="action-row">
+                        <button class="alt-btn" id="copyBtn" type="button">Copiar código Pix</button>
+                        <a class="alt-btn" id="ticketBtn" href="#" target="_blank" rel="noopener noreferrer">Abrir cobrança</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -847,29 +1033,31 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="beneficios">
       <div class="container">
         <div class="section-head">
-          <h3>O que está incluso</h3>
-          <p>
-            Uma apresentação mais forte do produto, com checkout bonito e estrutura visual completa para passar mais credibilidade.
-          </p>
+          <div class="section-title">
+            <div class="eyebrow small">Conteúdo incluso</div>
+            <h3>O que vem incluso</h3>
+          </div>
+          <p>Organizei os destaques principais em uma seção mais direta e mais forte, para o visitante entender o que recebe sem ruído.</p>
         </div>
 
         <div class="cards-3">
           <div class="info-card">
-            <h4>Apresentação premium</h4>
-            <p>Visual mais sério e profissional para evitar cara de página improvisada.</p>
+            <div class="card-number">01</div>
+            <h4>APK Mod</h4>
+            <p>Item destacado logo na vitrine principal para deixar claro o conteúdo incluso e elevar a percepção de entrega.</p>
           </div>
-
           <div class="info-card">
-            <h4>Pagamento rápido</h4>
-            <p>Fluxo direto com geração de Pix, QR Code e código copiável no mesmo lugar.</p>
+            <div class="card-number">02</div>
+            <h4>Holograma Color</h4>
+            <p>Apresentado como recurso visual premium dentro do pacote, com posição de destaque na composição da página.</p>
           </div>
-
           <div class="info-card">
-            <h4>Mais confiança</h4>
-            <p>Estrutura mais organizada para o usuário entender o produto e o valor sem ruído visual.</p>
+            <div class="card-number">03</div>
+            <h4>FOV 200%</h4>
+            <p>Incluído como benefício do pacote, com comunicação curta, clara e forte para bater o olho e entender rápido.</p>
           </div>
         </div>
       </div>
@@ -878,80 +1066,68 @@
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h3>Avaliações</h3>
-          <p>
-            Uma seção visualmente bem posicionada para reforçar percepção de qualidade e melhorar o peso da página.
-          </p>
+          <div class="section-title">
+            <div class="eyebrow small">Prova social</div>
+            <h3>Percepção de valor mais alta</h3>
+          </div>
+          <p>Esses blocos ajudam a fechar melhor o visual da página e dar mais peso para a experiência como um todo.</p>
         </div>
 
         <div class="reviews-grid">
           <div class="review-card">
             <div class="stars">★★★★★</div>
-            <p>Agora sim ficou com cara de projeto premium. O topo ficou muito mais forte e vende melhor.</p>
+            <p>Agora ficou com presença de verdade. Parece interface de produto premium, não página simples de cobrança.</p>
             <div class="review-user">
               <div class="avatar">V</div>
-              <div>
-                <strong>Victor F.</strong>
-                <span>Checkout premium</span>
-              </div>
+              <div><strong>Victor F.</strong><span>Checkout premium</span></div>
             </div>
           </div>
-
           <div class="review-card">
             <div class="stars">★★★★★</div>
-            <p>Bem mais profissional visualmente. O valor, o pacote e o formulário ficaram muito mais bem apresentados.</p>
+            <p>O fundo em movimento ficou muito mais elegante. Tem vida, mas não atrapalha nada. Esse equilíbrio ficou forte.</p>
             <div class="review-user">
               <div class="avatar">R</div>
-              <div>
-                <strong>Rafael M.</strong>
-                <span>Projeto digital</span>
-              </div>
+              <div><strong>Rafael M.</strong><span>Projeto digital</span></div>
             </div>
           </div>
-
           <div class="review-card">
             <div class="stars">★★★★★</div>
-            <p>Esse começo agora ficou muito melhor. Antes parecia template, agora parece página real de venda.</p>
+            <p>O bloco principal ficou absurdo. Preço, formulário e resultado parecem todos parte do mesmo produto de alto padrão.</p>
             <div class="review-user">
               <div class="avatar">L</div>
-              <div>
-                <strong>Lucas A.</strong>
-                <span>Landing premium</span>
-              </div>
+              <div><strong>Lucas A.</strong><span>Landing premium</span></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
       <div class="container">
         <div class="section-head">
-          <h3>Perguntas frequentes</h3>
-          <p>
-            Uma seção final para deixar a página mais completa e visualmente mais confiável.
-          </p>
+          <div class="section-title">
+            <div class="eyebrow small">Fechamento forte</div>
+            <h3>Perguntas frequentes</h3>
+          </div>
+          <p>O final ficou mais sólido para manter a experiência premium até a última seção.</p>
         </div>
 
-        <div class="faq">
+        <div class="faq-grid">
           <div class="faq-item">
-            <strong>O valor está certo?</strong>
-            <span>Sim. O valor da cobrança está configurado para R$ 14,99.</span>
+            <strong>O valor continua o mesmo?</strong>
+            <span>Sim. O visual foi elevado, mas a cobrança continua configurada em R$ 14,99.</span>
           </div>
-
           <div class="faq-item">
-            <strong>Recebo QR Code e código Pix?</strong>
-            <span>Sim. Assim que a cobrança for gerada, o site mostra os dois.</span>
+            <strong>O Pix segue funcionando?</strong>
+            <span>Sim. Mantive o formulário, o QR Code, o código copiável e o botão para abrir a cobrança.</span>
           </div>
-
           <div class="faq-item">
-            <strong>Funciona em celular?</strong>
-            <span>Sim. O layout é responsivo e se adapta bem no mobile.</span>
+            <strong>Funciona bem em celular?</strong>
+            <span>Sim. A composição foi pensada para continuar impactante no mobile sem perder clareza.</span>
           </div>
-
           <div class="faq-item">
-            <strong>A confirmação pode ser automática?</strong>
-            <span>Sim. O backend continua pronto para processar a confirmação configurada.</span>
+            <strong>As animações pesam demais?</strong>
+            <span>Não. Elas foram feitas com CSS em camadas leves para dar sofisticação sem comprometer a leitura.</span>
           </div>
         </div>
       </div>
@@ -959,7 +1135,7 @@
   </main>
 
   <footer class="footer">
-    GhostRoot Premium Project • Checkout seguro com pagamento Pix
+    GhostRoot Ultra Premium Project • Animated cinematic background • Pix seguro
   </footer>
 
   <script>
@@ -1032,7 +1208,7 @@
         setStatus(error.message || 'Erro ao gerar Pix.', 'error');
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Gerar Pix';
+        submitBtn.textContent = 'Gerar Pix agora';
       }
     });
 

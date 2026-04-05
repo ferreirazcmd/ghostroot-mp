@@ -65,11 +65,7 @@ function makeReference(product, email) {
     .replace(/(^-|-$)/g, '')
     .slice(0, 30);
 
-  const emailPart = String(email || 'cliente')
-    .split('@')[0]
-    .replace(/[^a-z0-9]/gi, '')
-    .slice(0, 16);
-
+  const emailPart = String(email || 'cliente').split('@')[0].replace(/[^a-z0-9]/gi, '').slice(0, 16);
   return `${slug || 'produto'}-${emailPart || 'cliente'}-${Date.now()}`;
 }
 
@@ -77,9 +73,11 @@ function getBaseUrl(req) {
   return process.env.SITE_BASE_URL || `${req.protocol}://${req.get('host')}`;
 }
 
+
 function parseAmount(value, fallback = 14.99) {
   const normalized = String(value ?? '')
     .trim()
+    .replace(/\./g, '')
     .replace(',', '.');
 
   const amount = Number.parseFloat(normalized);
@@ -105,15 +103,7 @@ async function mercadoPagoRequest(endpoint, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    console.error('Mercado Pago status:', response.status);
-    console.error('Mercado Pago resposta:', JSON.stringify(data, null, 2));
-
-    const errorMessage =
-      data?.message ||
-      data?.cause?.[0]?.description ||
-      data?.error ||
-      'Erro na API do Mercado Pago.';
-
+    const errorMessage = data?.message || data?.cause?.[0]?.description || 'Erro na API do Mercado Pago.';
     throw new Error(errorMessage);
   }
 
@@ -144,13 +134,8 @@ async function sendApprovedEmail(payment) {
 
   const transporter = getTransporter();
   const to = process.env.NOTIFY_TO_EMAIL || process.env.GMAIL_USER;
-  const amount = Number(payment.transaction_amount || 0).toLocaleString('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-  const customerName =
-    [payment.payer?.first_name, payment.payer?.last_name].filter(Boolean).join(' ') ||
-    'Cliente sem nome';
+  const amount = Number(payment.transaction_amount || 0).toFixed(2);
+  const customerName = [payment.payer?.first_name, payment.payer?.last_name].filter(Boolean).join(' ') || 'Cliente sem nome';
   const customerEmail = payment.payer?.email || 'Não informado';
   const externalReference = payment.external_reference || 'Sem referência';
   const productName = payment.description || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot';
@@ -216,9 +201,7 @@ app.post('/api/create-pix', async (req, res) => {
     const name = String(req.body.name || '').trim();
     const email = String(req.body.email || '').trim();
     const cpf = String(req.body.cpf || '').trim();
-    const product = String(
-      req.body.product || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot'
-    ).trim();
+    const product = String(req.body.product || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot').trim();
     const amount = parseAmount(process.env.PRODUCT_PRICE, 14.99);
 
     if (!name || !email) {
@@ -226,8 +209,6 @@ app.post('/api/create-pix', async (req, res) => {
     }
 
     const externalReference = makeReference(product, email);
-    const notificationUrl = `${getBaseUrl(req)}/api/webhook/mercadopago`;
-
     const payment = await mercadoPagoRequest('/v1/payments', {
       method: 'POST',
       headers: {
@@ -237,7 +218,7 @@ app.post('/api/create-pix', async (req, res) => {
         transaction_amount: amount,
         description: product,
         payment_method_id: 'pix',
-        notification_url: notificationUrl,
+        notification_url: `${getBaseUrl(req)}/api/webhook/mercadopago`,
         external_reference: externalReference,
         payer: buildPayer({ name, email, cpf }),
       }),
@@ -254,7 +235,6 @@ app.post('/api/create-pix', async (req, res) => {
       ticket_url: tx.ticket_url,
     });
   } catch (error) {
-    console.error('Erro ao gerar Pix:', error);
     return res.status(500).json({ error: error.message || 'Erro ao gerar Pix.' });
   }
 });
@@ -269,7 +249,6 @@ app.get('/api/payment-status/:paymentId', async (req, res) => {
       external_reference: payment.external_reference,
     });
   } catch (error) {
-    console.error('Erro ao consultar pagamento:', error);
     return res.status(500).json({ error: error.message || 'Erro ao consultar pagamento.' });
   }
 });
@@ -292,11 +271,9 @@ app.post('/api/webhook/mercadopago', async (req, res) => {
 app.get('/api/webhook/mercadopago', async (req, res) => {
   try {
     const paymentId = req.query['data.id'] || req.query.id;
-
     if (paymentId) {
       await tryFinalizeApprovedPayment(paymentId);
     }
-
     return res.sendStatus(200);
   } catch (error) {
     console.error('Erro no webhook GET:', error);
