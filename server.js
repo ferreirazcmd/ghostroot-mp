@@ -65,7 +65,11 @@ function makeReference(product, email) {
     .replace(/(^-|-$)/g, '')
     .slice(0, 30);
 
-  const emailPart = String(email || 'cliente').split('@')[0].replace(/[^a-z0-9]/gi, '').slice(0, 16);
+  const emailPart = String(email || 'cliente')
+    .split('@')[0]
+    .replace(/[^a-z0-9]/gi, '')
+    .slice(0, 16);
+
   return `${slug || 'produto'}-${emailPart || 'cliente'}-${Date.now()}`;
 }
 
@@ -73,12 +77,16 @@ function getBaseUrl(req) {
   return process.env.SITE_BASE_URL || `${req.protocol}://${req.get('host')}`;
 }
 
-
 function parseAmount(value, fallback = 14.99) {
-  const normalized = String(value ?? '')
-    .trim()
-    .replace(/\./g, '')
-    .replace(',', '.');
+  if (value === undefined || value === null || String(value).trim() === '') {
+    return fallback;
+  }
+
+  const raw = String(value).trim();
+
+  const normalized = raw.includes(',')
+    ? raw.replace(/\./g, '').replace(',', '.')
+    : raw;
 
   const amount = Number.parseFloat(normalized);
   return Number.isFinite(amount) && amount > 0 ? amount : fallback;
@@ -103,7 +111,10 @@ async function mercadoPagoRequest(endpoint, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    const errorMessage = data?.message || data?.cause?.[0]?.description || 'Erro na API do Mercado Pago.';
+    const errorMessage =
+      data?.message ||
+      data?.cause?.[0]?.description ||
+      'Erro na API do Mercado Pago.';
     throw new Error(errorMessage);
   }
 
@@ -135,7 +146,9 @@ async function sendApprovedEmail(payment) {
   const transporter = getTransporter();
   const to = process.env.NOTIFY_TO_EMAIL || process.env.GMAIL_USER;
   const amount = Number(payment.transaction_amount || 0).toFixed(2);
-  const customerName = [payment.payer?.first_name, payment.payer?.last_name].filter(Boolean).join(' ') || 'Cliente sem nome';
+  const customerName =
+    [payment.payer?.first_name, payment.payer?.last_name].filter(Boolean).join(' ') ||
+    'Cliente sem nome';
   const customerEmail = payment.payer?.email || 'Não informado';
   const externalReference = payment.external_reference || 'Sem referência';
   const productName = payment.description || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot';
@@ -201,7 +214,10 @@ app.post('/api/create-pix', async (req, res) => {
     const name = String(req.body.name || '').trim();
     const email = String(req.body.email || '').trim();
     const cpf = String(req.body.cpf || '').trim();
-    const product = String(req.body.product || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot').trim();
+    const product = String(
+      req.body.product || process.env.DEFAULT_PRODUCT_NAME || 'GhostRoot'
+    ).trim();
+
     const amount = parseAmount(process.env.PRODUCT_PRICE, 14.99);
 
     if (!name || !email) {
@@ -209,6 +225,7 @@ app.post('/api/create-pix', async (req, res) => {
     }
 
     const externalReference = makeReference(product, email);
+
     const payment = await mercadoPagoRequest('/v1/payments', {
       method: 'POST',
       headers: {
@@ -249,42 +266,32 @@ app.get('/api/payment-status/:paymentId', async (req, res) => {
       external_reference: payment.external_reference,
     });
   } catch (error) {
-    return res.status(500).json({ error: error.message || 'Erro ao consultar pagamento.' });
+    return res.status(500).json({
+      error: error.message || 'Erro ao consultar pagamento.',
+    });
   }
 });
 
 app.post('/api/webhook/mercadopago', async (req, res) => {
   try {
-    const paymentId = req.body?.data?.id || req.body?.id || req.query['data.id'] || req.query.id;
+    const type = req.body?.type || req.query?.type;
+    const dataId = req.body?.data?.id || req.query?.['data.id'];
 
-    if (paymentId) {
-      await tryFinalizeApprovedPayment(paymentId);
+    if (type === 'payment' && dataId) {
+      await tryFinalizeApprovedPayment(dataId);
     }
 
     return res.sendStatus(200);
   } catch (error) {
-    console.error('Erro no webhook:', error);
+    console.error('Erro no webhook Mercado Pago:', error.message);
     return res.sendStatus(200);
   }
 });
 
-app.get('/api/webhook/mercadopago', async (req, res) => {
-  try {
-    const paymentId = req.query['data.id'] || req.query.id;
-    if (paymentId) {
-      await tryFinalizeApprovedPayment(paymentId);
-    }
-    return res.sendStatus(200);
-  } catch (error) {
-    console.error('Erro no webhook GET:', error);
-    return res.sendStatus(200);
-  }
-});
-
-app.get('/api/health', (req, res) => {
-  res.json({ ok: true, uptime: process.uptime() });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`GhostRoot rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
